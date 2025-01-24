@@ -2,14 +2,16 @@ import os
 import pandas as pd
 
 def calcular_totales_y_medias_por_anio(ruta_directorio):
-    # Diccionario para almacenar totales y medias por año
+    # Diccionario para almacenar totales, medias y estadísticas por año
     resultados = {}
+    contador_archivos = 0  # Contador de archivos .dat
 
     # Recorrer archivos en el directorio y subdirectorios
     for directorio_raiz, _, archivos in os.walk(ruta_directorio):
         for archivo in archivos:
             # Solo procesar archivos con extensión .dat
             if archivo.endswith('.dat'):
+                contador_archivos += 1  # Incrementar el contador de estaciones meteorológicas
                 ruta_archivo = os.path.join(directorio_raiz, archivo)
 
                 # Leer archivo como texto y dividir en líneas
@@ -24,15 +26,16 @@ def calcular_totales_y_medias_por_anio(ruta_directorio):
                     columnas = linea.strip().split()
 
                     # Verificar que hay suficientes columnas
-                    if len(columnas) < 3: 
+                    if len(columnas) < 3:
                         continue
 
                     # La primera columna se ignora, la segunda es el año, la tercera es el mes
                     _, anio, mes, *valores = columnas
 
-                    # Convertir año a entero
+                    # Convertir año y mes a entero
                     try:
                         anio = int(anio)
+                        mes = int(mes)
                     except ValueError:
                         continue
 
@@ -46,55 +49,55 @@ def calcular_totales_y_medias_por_anio(ruta_directorio):
                         except ValueError:
                             continue
 
-                    # Calcular suma si hay datos válidos
+                    # Calcular suma mensual si hay datos válidos
                     if valores_validos:
-                        total = sum(valores_validos)
+                        total_mes = sum(valores_validos) / 10  # Convertir de décimas de milímetro a milímetros
                     else:
-                        total = 0
+                        total_mes = 0
 
                     # Agregar resultados al diccionario por año
                     if anio in resultados:
-                        resultados[anio]['total'] += total
-                        resultados[anio]['count'] += len(valores_validos)
+                        resultados[anio]['total'] += total_mes
+                        resultados[anio]['count'] += 1  # Contar meses válidos
+                        resultados[anio]['max_prec'] = max(resultados[anio]['max_prec'], total_mes)
+                        resultados[anio]['min_prec'] = min(resultados[anio]['min_prec'], total_mes) if total_mes > 0 else resultados[anio]['min_prec']
                     else:
-                        resultados[anio] = {'total': total, 'count': len(valores_validos)}
+                        resultados[anio] = {
+                            'total': total_mes,
+                            'count': 1 if total_mes > 0 else 0,
+                            'max_prec': total_mes,
+                            'min_prec': total_mes if total_mes > 0 else float('inf')
+                        }
 
-    # Calcular medias finales
+    # Calcular estadísticas finales
     tabla_resultados = []
     for anio, valores in resultados.items():
         total = valores['total']
         count = valores['count']
-        media = total / count if count > 0 else 0
-        tabla_resultados.append([anio, total, media])
+        # Dividir el total anual entre 12 meses y el número de archivos (estaciones meteorológicas)
+        media = total / (12 * contador_archivos) if count > 0 else 0
+        max_prec = valores['max_prec']
+        min_prec = valores['min_prec'] if valores['min_prec'] != float('inf') else 0  # Si no hay datos válidos, min_prec = 0
+        tabla_resultados.append([anio, total, media, max_prec, min_prec])
 
     # Crear un DataFrame y ordenar por año
-    df_resultados = pd.DataFrame(tabla_resultados, columns=['Año', 'Total', 'Media'])
+    df_resultados = pd.DataFrame(tabla_resultados, columns=['Año', 'Total', 'Media', 'Máxima Mensual', 'Mínima Mensual'])
     df_resultados.sort_values(by='Año', inplace=True)
 
     # Calcular la columna de variación porcentual
     df_resultados['Variación (%)'] = df_resultados['Total'].pct_change() * 100
 
-    # Ordenar por Total de mayor a menor y menor a mayor
-    df_altos = df_resultados.sort_values(by='Total', ascending=False).head(5)  # 5 años con más total
-    df_bajos = df_resultados.sort_values(by='Total', ascending=True).head(5)  # 5 años con menos total
-
-    # Extraer solo los años con más y menos total
-    años_con_mas_total = df_altos['Año'].values
-    años_con_menos_total = df_bajos['Año'].values
-
-    # Añadir esas columnas al DataFrame original
-    df_resultados['Años con más precipitaciones'] = pd.Series(list(años_con_mas_total) + [None] * (len(df_resultados) - len(años_con_mas_total)))
-    df_resultados['Años con menos precipitaciones'] = pd.Series(list(años_con_menos_total) + [None] * (len(df_resultados) - len(años_con_menos_total)))
+    # Convertir la columna "Media" de milímetros a litros por metro cuadrado
+    df_resultados['Media'] = df_resultados['Media'] * 10  # Convertir de milímetros a litros por metro cuadrado
 
     return df_resultados
 
 
 # Ruta del directorio donde se encuentran los archivos
-ruta_directorio = './TA06-Grup3-Izan-Miquel-Jordi/E01'
+ruta_directorio = '../E01'
 
 # Calcular resultados desde el directorio
 resultados = calcular_totales_y_medias_por_anio(ruta_directorio)
 
 # Mostrar la tabla de resultados
 print(resultados)
-

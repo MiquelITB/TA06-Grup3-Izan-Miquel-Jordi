@@ -33,13 +33,10 @@ def contar_errores_separacion(ruta):
     return errores_separacion
 
 # Ruta del directori on es troben els arxius
-ruta_directorio = '/home/miguel.valencia.7e8/PycharmProjects/TA06-Grup3-Izan-Miquel-Jordi/TA06-Grup3-Izan-Miquel-Jordi/E01'
+ruta_directorio = '../E01'
 
 # Cridar la funció per comptar els errors de separació
 errores = contar_errores_separacion(ruta_directorio)
 
 # Imprimir el resultat
 print(f"El nombre total d'errors de separació (més d'un espai consecutiu) en els arxius és: {errores}")
-
-
-

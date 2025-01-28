@@ -33,7 +33,7 @@ def contar_errores_separacion(ruta):
     return errores_separacion
 
 # Ruta del directori on es troben els arxius
-ruta_directorio = '../E01'
+ruta_directorio = './E01'
 
 # Cridar la funció per comptar els errors de separació
 errores = contar_errores_separacion(ruta_directorio)

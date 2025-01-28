@@ -1,7 +1,7 @@
 import subprocess
 
 # Ruta de los programas
-ruta_programas = '../E02'
+ruta_programas = './E02'
 
 # Comandos para ejecutar cada uno de los programas (ajustando los nombres según corresponda)
 comandos = [

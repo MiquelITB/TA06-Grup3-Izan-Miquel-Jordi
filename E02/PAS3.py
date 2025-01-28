@@ -66,7 +66,7 @@ def contar_valores_archivos(ruta):
     return total_valores_numericos, total_valores_letras, total_líneas_correctas, total_líneas_incorrectas, total_líneas_totales
 
 # Ruta del directori on es troben els arxius
-ruta_directorio = '../E01'
+ruta_directorio = './E01'
 
 # Cridar la funció per comptar els valors dels arxius
 total_valores_numericos, total_valores_letras, total_líneas_correctas, total_líneas_incorrectas, total_líneas_totales = contar_valores_archivos(ruta_directorio)

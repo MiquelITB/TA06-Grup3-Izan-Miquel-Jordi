@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mi Página Web</title>
 </head>
 <body>
+
+    <header>
+        <h1>Bienvenido a Mi Página Web</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Inicio</a></li>
+            <li><a href="#about">Sobre Nosotros</a></li>
+            <li><a href="#contact">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section id="home">
+        <h2>Inicio</h2>
+        <p>Bienvenido a nuestro sitio web. Aquí podrás encontrar información útil y entretenida.</p>
+    </section>
+
+    <section id="about">
+        <h2>Sobre Nosotros</h2>
+        <p>Somos un equipo dedicado a ofrecer los mejores servicios. Nuestra misión es brindarte la mejor experiencia.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contacto</h2>
+        <p>Si tienes alguna pregunta, no dudes en ponerte en contacto con nosotros:</p>
+        <form action="#" method="post">
+            <label for="name">Tu nombre:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Tu correo electrónico:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="message">Mensaje:</label><br>
+            <textarea id="message" name="message" rows="4" required></textarea><br>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Mi Página Web. Todos los derechos reservados.</p>
+    </footer>
 
 </body>
 </html>

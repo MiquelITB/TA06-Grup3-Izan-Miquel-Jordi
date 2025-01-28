@@ -85,5 +85,5 @@ def validar_archivos(directorio):
     print(f"\nTodos los archivos tienen el mismo formato ({extension}).")
 
 # Cambia 'ruta/del/directorio' por el directorio que deseas verificar
-directorio = '../E01'
+directorio = './E01'
 validar_archivos(directorio)

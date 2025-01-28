@@ -94,10 +94,13 @@ def calcular_totales_y_medias_por_anio(ruta_directorio):
 
 
 # Ruta del directorio donde se encuentran los archivos
-ruta_directorio = '../E01'
+ruta_directorio = './E01'
 
 # Calcular resultados desde el directorio
 resultados = calcular_totales_y_medias_por_anio(ruta_directorio)
+
+# Exportar el DataFrame a un archivo CSV llamado 'resultado_estadistica.csv'
+resultados.to_csv('resultado_estadistica.csv', index=False)
 
 # Mostrar la tabla de resultados
 print(resultados)

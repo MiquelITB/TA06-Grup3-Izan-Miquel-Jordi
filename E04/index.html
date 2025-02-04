@@ -4,52 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mi Página Web</title>
+    <title>Dades i Gràfiques</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Incloure Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
     <header>
-        <h1>Bienvenido a Mi Página Web</h1>
+        <h1>Dades i Gràfiques</h1>
     </header>
 
     <nav>
         <ul>
-            <li><a href="#home">Inicio</a></li>
-            <li><a href="#about">Sobre Nosotros</a></li>
-            <li><a href="#contact">Contacto</a></li>
-        </ul>
-    </nav>
-
-    <section id="home">
-        <h2>Inicio</h2>
-        <p>Bienvenido a nuestro sitio web. Aquí podrás encontrar información útil y entretenida.</p>
-    </section>
-
-    <section id="about">
-        <h2>Sobre Nosotros</h2>
-        <p>Somos un equipo dedicado a ofrecer los mejores servicios. Nuestra misión es brindarte la mejor experiencia.</p>
-    </section>
-
-    <section id="contact">
-        <h2>Contacto</h2>
-        <p>Si tienes alguna pregunta, no dudes en ponerte en contacto con nosotros:</p>
-        <form action="#" method="post">
-            <label for="name">Tu nombre:</label>
-            <input type="text" id="name" name="name" required><br>
-
-            <label for="email">Tu correo electrónico:</label>
-            <input type="email" id="email" name="email" required><br>
-
-            <label for="message">Mensaje:</label><br>
-            <textarea id="message" name="message" rows="4" required></textarea><br>
-
-            <button type="submit">Enviar</button>
-        </form>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Mi Página Web. Todos los derechos reservados.</p>
-    </footer>
-
-</body>
-</html>
+            <!DOCTYPE html>
+            <html lang="es">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <title>Dades i Gràfiques</title>
+                <link rel="stylesheet" href="style.css">
+                <!-- Incloure Chart.js -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            </head>
+            <body>
+            
+                <header>
+                    <h1>Dades i Gràfiques</h1>
+                </header>
+            
+                <nav>
+                    <ul>
+                        <li><a href="#dades">Dades</a></li>
+                        <li><a href="#grafiques">Gràfiques</a></li>
+                    </ul>
+                </nav>
+            
+                <section id="dades">
+                    <h2>Dades</h2>
+                    <p>A continuació es mostren les dades recollides:</p>
+                    <pre id="csv-data"></pre> <!-- Aquí es mostraran les dades del CSV -->
+                </section>
+            
+                <section id="grafiques">
+                    <h2>Gràfiques</h2>
+                    <p>Les següents gràfiques representen la informació obtinguda:</p>
+                    <div class="grafiques">
+                        <canvas id="grafica1" width="400" height="200"></canvas> <!-- Gràfica de variació anual -->
+                        <canvas id="grafica2" width="400" height="200"></canvas> <!-- Gràfica de mitjanes -->
+                        <canvas id="grafica3" width="400" height="200"></canvas> <!-- Gràfica d'extrems -->
+                    </div>
+                </section>
+            
+                <footer>
+                    <p>&copy; 2025 Dades i Gràfiques. Tots els drets reservats.</p>
+                </footer>
+            
+                <script src="script.js"></script> <!-- Enllaçar al fitxer JavaScript extern -->
+            </body>
+            </html>

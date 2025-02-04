@@ -19,6 +19,7 @@ plt.xticks(rotation=45)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.show()
+plt.savefig('grafica.png')  # Guarda la gráfica como una imagen
 
 # 4. Gráfico de líneas para la Media por Año
 plt.figure(figsize=(10, 6))
@@ -29,6 +30,8 @@ plt.xlabel('Año')
 plt.grid(axis='both', linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.show()
+plt.savefig('grafica2.png')  # Guarda la gráfica como una imagen
+
 
 # 5. Gráfico de barras para la Variación porcentual
 plt.figure(figsize=(10, 6))
@@ -40,3 +43,4 @@ plt.axhline(0, color='gray', linestyle='--', alpha=0.7)
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
+plt.savefig('grafica3.png')  # Guarda la gráfica como una imagen

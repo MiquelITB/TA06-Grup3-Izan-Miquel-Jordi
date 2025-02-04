@@ -100,7 +100,7 @@ ruta_directorio = './E01'
 resultados = calcular_totales_y_medias_por_anio(ruta_directorio)
 
 # Exportar el DataFrame a un archivo CSV llamado 'resultado_estadistica.csv'
-resultados.to_csv('resultado_estadistica.csv', index=False)
+resultados.to_csv('/EO4/resultado_estadistica.csv', index=False)
 
 # Mostrar la tabla de resultados
 print(resultados)

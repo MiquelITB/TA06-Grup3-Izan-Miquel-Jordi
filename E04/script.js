@@ -1,42 +1,100 @@
-// Funció per llegir el CSV
-async function llegirCSV() {
-    const response = await fetch('resultado_estadistica.csv'); // Ruta al teu CSV
-    const data = await response.text();
-    return data;
-}
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('resultado_estadistica.csv')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la càrrega del fitxer CSV');
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log('Dades del CSV:', data); // Mostra les dades del CSV a la consola
+            const rows = data.split('\n'); // Separa les files
+            const taula = document.getElementById('taula-dades');
 
-// Funció per convertir el CSV en un array d'objectes
-function parsejarCSV(csv) {
-    const linies = csv.split('\n');
-    const resultat = [];
-    const capçaleres = linies[0].split(',');
+            // Crear la taula
+            const table = document.createElement('table');
+            table.style.width = '100%';
+            table.setAttribute('border', '1');
+            table.setAttribute('cellpadding', '5');
+            table.setAttribute('cellspacing', '0');
 
-    for (let i = 1; i < linies.length; i++) {
-        const obj = {};
-        const currentLine = linies[i].split(',');
+            // Crear la capçalera de la taula
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            const headers = rows[0].split(','); // La primera fila conté les capçaleres
 
-        for (let j = 0; j < capçaleres.length; j++) {
-            obj[capçaleres[j]] = currentLine[j];
-        }
-        resultat.push(obj);
-    }
-    return resultat;
-}
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header.trim(); // Neteja els espais en blanc
+                headerRow.appendChild(th);
+            });
 
-// Funció per crear la gràfica de variació anual
-function crearGraficaVariacio(dades) {
-    const ctx = document.getElementById('grafica1').getContext('2d');
-    const labels = dades.map(entry => entry.Mes); // Extraure els mesos
-    const vendes = dades.map(entry => parseInt(entry.Vendes)); // Extraure les vendes
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
 
+            // Crear el cos de la taula
+            const tbody = document.createElement('tbody');
+
+            for (let i = 1; i < rows.length; i++) { // Comença des de la segona fila
+                const columns = rows[i].split(',');
+                if (columns.length >= 6) { // Verifica que la fila tingui suficents columnes
+                    const tr = document.createElement('tr');
+
+                    columns.forEach(column => {
+                        const td = document.createElement('td');
+                        td.textContent = column.trim(); // Neteja els espais en blanc
+                        tr.appendChild(td);
+                    });
+
+                    tbody.appendChild(tr);
+                }
+            }
+
+            table.appendChild(tbody);
+            taula.appendChild(table); // Afegir la taula al div
+
+            // Crear les gràfiques
+            const years = [];
+            const totals = [];
+            const medias = [];
+            const maximas = [];
+            const minimas = [];
+            const variaciones = [];
+
+            for (let i = 1; i < rows.length; i++) {
+                const columns = rows[i].split(',');
+                if (columns.length >= 6) {
+                    years.push(columns[0]);
+                    totals.push(parseFloat(columns[1]));
+                    medias.push(parseFloat(columns[2]));
+                    maximas.push(parseFloat(columns[3]));
+                    minimas.push(parseFloat(columns[4]));
+                    const variacion = columns[5] ? parseFloat(columns[5]) : null;
+                    variaciones.push(variacion);
+                }
+            }
+
+            createChart('graficaTotal', 'Total per any', years, totals);
+            createChart('graficaMedia', 'Mitjana per any', years, medias);
+            createChart('graficaMaxima', 'Màxima mensual per any', years, maximas);
+            createChart('graficaMinima', 'Mínima mensual per any', years, minimas);
+            createChart('graficaVariacion', 'Variació per any', years, variaciones);
+        })
+        .catch(error => {
+            console.error('Error llegint el fitxer CSV:', error);
+            document.getElementById('taula-dades').textContent = 'Error carregant les dades.';
+        });
+});
+
+function createChart(canvasId, label, labels, data) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
     new Chart(ctx, {
-        type: 'line', // Tipus de gràfica
+        type: 'line',
         data: {
             labels: labels,
             datasets: [{
-                label: 'Variació Anual',
-                data: vendes,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                label: label,
+                data: data,
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
             }]
@@ -50,79 +108,3 @@ function crearGraficaVariacio(dades) {
         }
     });
 }
-
-// Funció per crear la gràfica de mitjanes
-function crearGraficaMitjanes(dades) {
-    const ctx = document.getElementById('grafica2').getContext('2d');
-    const labels = dades.map(entry => entry.Mes); // Extraure els mesos
-    const vendes = dades.map(entry => parseInt(entry.Vendes)); // Extraure les vendes
-
-    const totalVendes = vendes.reduce((a, b) => a + b, 0);
-    const mitjanaVendes = totalVendes / vendes.length;
-
-    new Chart(ctx, {
-        type: 'bar', // Tipus de gràfica
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Mitjanes Mensuals',
-                data: vendes.map(() => mitjanaVendes),
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-}
-
-// Funció per crear la gràfica d'extrems
-function crearGraficaExtrems(dades) {
-    const ctx = document.getElementById('grafica3').getContext('2d');
-    const labels = dades.map(entry => entry.Mes); // Extraure els mesos
-    const vendes = dades.map(entry => parseInt(entry.Vendes)); // Extraure les vendes
-
-    const maximaVenda = Math.max(...vendes);
-    const minimaVenda = Math.min(...vendes);
-
-    new Chart(ctx, {
-        type: 'bar', // Tipus de gràfica
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Extrems de Vendes',
-                data: vendes,
-                backgroundColor: vendes.map(venda => venda === maximaVenda ? 'rgba(255, 99, 132, 0.2)' : (venda === minimaVenda ? 'rgba(54, 162, 235, 0.2)' : 'rgba(75, 192, 192, 0.2)')),
-                borderColor: vendes.map(venda => venda === maximaVenda ? 'rgba(255, 99, 132, 1)' : (venda === minimaVenda ? 'rgba(54, 162, 235, 1)' : 'rgba(75, 192, 192, 1)')),
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-}
-
-// Funció principal
-async function main() {
-    const csv = await llegirCSV();
-    document.getElementById('csv-data').textContent = csv; // Mostrar el CSV en pantalla
-    const dades = parsejarCSV(csv);
-
-    crearGraficaVariacio(dades); // Crear la gràfica de variació anual
-    crearGraficaMitjanes(dades); // Crear la gràfica de mitjanes
-    crearGraficaExtrems(dades); // Crear la gràfica d'extrems
-}
-
-// Executar la funció principal
-main();

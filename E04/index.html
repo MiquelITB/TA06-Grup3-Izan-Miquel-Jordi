@@ -17,50 +17,33 @@
 
     <nav>
         <ul>
-            <!DOCTYPE html>
-            <html lang="es">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                <title>Dades i Gràfiques</title>
-                <link rel="stylesheet" href="style.css">
-                <!-- Incloure Chart.js -->
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            </head>
-            <body>
-            
-                <header>
-                    <h1>Dades i Gràfiques</h1>
-                </header>
-            
-                <nav>
-                    <ul>
-                        <li><a href="#dades">Dades</a></li>
-                        <li><a href="#grafiques">Gràfiques</a></li>
-                    </ul>
-                </nav>
-            
-                <section id="dades">
-                    <h2>Dades</h2>
-                    <p>A continuació es mostren les dades recollides:</p>
-                    <pre id="csv-data"></pre> <!-- Aquí es mostraran les dades del CSV -->
-                </section>
-            
-                <section id="grafiques">
-                    <h2>Gràfiques</h2>
-                    <p>Les següents gràfiques representen la informació obtinguda:</p>
-                    <div class="grafiques">
-                        <canvas id="grafica1" width="400" height="200"></canvas> <!-- Gràfica de variació anual -->
-                        <canvas id="grafica2" width="400" height="200"></canvas> <!-- Gràfica de mitjanes -->
-                        <canvas id="grafica3" width="400" height="200"></canvas> <!-- Gràfica d'extrems -->
-                    </div>
-                </section>
-            
-                <footer>
-                    <p>&copy; 2025 Dades i Gràfiques. Tots els drets reservats.</p>
-                </footer>
-            
-                <script src="script.js"></script> <!-- Enllaçar al fitxer JavaScript extern -->
-            </body>
-            </html>
+            <li><a href="#dades">Dades</a></li>
+            <li><a href="#grafiques">Gràfiques</a></li>
+        </ul>
+    </nav>
+
+    <section id="dades">
+        <h2>Dades</h2>
+        <p>A continuació es mostren les dades recollides:</p>
+        <div id="taula-dades"></div> <!-- Aquí es mostrarà la taula -->
+    </section>
+
+    <section id="grafiques">
+        <h2>Gràfiques</h2>
+        <p>Les següents gràfiques representen la informació obtinguda:</p>
+        <div class="grafiques">
+            <canvas id="graficaTotal" width="400" height="200"></canvas> <!-- Gràfica de Total per any -->
+            <canvas id="graficaMedia" width="400" height="200"></canvas> <!-- Gràfica de Mitjana per any -->
+            <canvas id="graficaMaxima" width="400" height="200"></canvas> <!-- Gràfica de Màxima mensual per any -->
+            <canvas id="graficaMinima" width="400" height="200"></canvas> <!-- Gràfica de Mínima mensual per any -->
+            <canvas id="graficaVariacion" width="400" height="200"></canvas> <!-- Gràfica de Variació per any -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Dades i Gràfiques. Tots els drets reservats.</p>
+    </footer>
+
+    <script src="script.js"></script> <!-- Enllaçar al fitxer JavaScript extern -->
+</body>
+</html>

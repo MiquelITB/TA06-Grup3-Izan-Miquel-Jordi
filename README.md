@@ -36,31 +36,31 @@ Este archivo valida el formato de los archivos obtenidos de AEMET, comprobando q
 #### PAS2
 La detección del delimitador y del número de columnas de los archivos CSV se ha realizado recorriendo un directorio, comprobando que todos los archivos tengan la misma extensión y mostrando en pantalla los detalles obtenidos.  
 
-![captura3](../E04/img/captura3.png)
+![captura3](E04/Captura3.PNG)
 
 #### PAS3
 La revisión de los datos se ha realizado asegurando que no contengan errores, valores faltantes o inconsistencias. Además, se ha verificado la consistencia de las columnas, comprobando que cada una tenga el tipo esperado.  
 
-![captura4](../E04/img/captura4.png)
+![captura4](E04/Captura4.PNG)
 
 #### PAS4
 El cálculo de los totales y promedios anuales de precipitación se ha realizado recorriendo los archivos `.dat` de un directorio y sus subdirectorios, leyendo los datos a partir de la tercera fila, convirtiendo los valores válidos (excluyendo los `-999`) de décimas de milímetro a milímetros, acumulando por año los totales, promedios (convertidos a litros por metro cuadrado), máximos y mínimos mensuales, calculando la variación porcentual interanual y exportando los resultados en un archivo CSV.  
-![captura5](../E04/img/captura5.png)
+![captura5](E04/Captura5.PNG)
 
 #### E03
 En este subdirectorio se encuentra el archivo que genera los gráficos a partir de los datos filtrados obtenidos.  
 
-![captura6](../E04/img/captura6.png)
+![captura6](E04/Captura6.PNG)
 
 ## WEB
 La página web consta de diferentes gráficos que hemos creado a partir de los datos filtrados. La creación de la web se basa en un archivo HTML que sirve de estructura, un archivo CSS para editar la apariencia y un archivo JavaScript.  
 
-![captura7](../E04/img/captura7.png)  
+![captura7](E04/Captura7.PNG)  
 
-![captura8](../E04/img/captura8.png)  
+![captura8](E04/Captura8.PNG)  
 
-![captura9](../E04/img/captura9.png)
+![captura9](E04/Captura9.PNG)
 
-![captura10](../E04/img/captura10.png) 
+![captura10](E04/Captura10.PNG) 
 
-![captura11](../E04/img/captura11.png)
+![captura11](E04/Captura11.PNG)

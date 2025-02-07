@@ -42,8 +42,6 @@ La revisión de los datos se ha realizado asegurando que no contengan errores, v
 #### PAS4
 El cálculo de los totales y promedios anuales de precipitación se ha realizado recorriendo los archivos `.dat` de un directorio y sus subdirectorios, leyendo los datos a partir de la tercera fila, convirtiendo los valores válidos (excluyendo los `-999`) de décimas de milímetro a milímetros, acumulando por año los totales, promedios (convertidos a litros por metro cuadrado), máximos y mínimos mensuales, calculando la variación porcentual interanual y exportando los resultados en un archivo CSV.  
 **Capturas de pantalla de los resultados**  
-**Capturas de pantalla de los resultados**  
-**Capturas de pantalla de los resultados**
 
 #### E03
 En este subdirectorio se encuentra el archivo que genera los gráficos a partir de los datos filtrados obtenidos.  

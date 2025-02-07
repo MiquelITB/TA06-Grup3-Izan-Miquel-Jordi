@@ -64,3 +64,4 @@ La página web consta de diferentes gráficos que hemos creado a partir de los d
 ![captura10](E04/Captura10.PNG) 
 
 ![captura11](E04/Captura11.PNG)
+![captura11](E04/Captura12.PNG)

@@ -22,7 +22,7 @@ La estructura del proyecto se ha dividido en diferentes apartados.
 
 ### Obtención de los datos
 La obtención de los datos se ha realizado desde la página oficial de AEMET, la cual ofrece información sobre las precipitaciones desde 2006 hasta 2100. Estos datos se encuentran en el subdirectorio `E01`.  
-![captura1](../E04/img/captura1.png)
+![captura1](E04/CapturaNUM1.PNG)
 
 ### Programa
 En el subdirectorio `E02` se encuentran los archivos que procesan y convierten los datos en información valiosa.

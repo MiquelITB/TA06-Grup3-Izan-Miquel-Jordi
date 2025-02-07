@@ -31,7 +31,7 @@ En el subdirectorio `E02` se encuentran los archivos que procesan y convierten l
 #### PAS1
 Este archivo valida el formato de los archivos obtenidos de AEMET, comprobando que la cabecera, la segunda línea y las separaciones entre datos cumplan el formato esperado, y contando los errores encontrados.  
 
-![captura2](../E04/img/captura2.png)
+![captura2]E04/Captura2.PNG
 
 #### PAS2
 La detección del delimitador y del número de columnas de los archivos CSV se ha realizado recorriendo un directorio, comprobando que todos los archivos tengan la misma extensión y mostrando en pantalla los detalles obtenidos.  

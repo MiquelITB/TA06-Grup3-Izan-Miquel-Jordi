@@ -52,3 +52,5 @@ La página web consta de diferentes gráficos que hemos creado a partir de los d
 **Capturas de pantalla de los resultados**  
 **Capturas de pantalla de los resultados**  
 **Capturas de pantalla de los resultados**
+**Capturas de pantalla de los resultados**  
+**Capturas de pantalla de los resultados**
